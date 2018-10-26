@@ -1,0 +1,16 @@
+function _update_ps1() {
+    PS1=$(powerline-shell $?)
+}
+
+if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
+
+# fix the history
+export HISTFILESIZE=100000
+export HISTSIZE=100000
+export HISTIGNORE="&:[ ]*:exit"
+shopt -s histappend   # append to the history file
+shopt -s cmdhist      # multiline commands as one history item
+
+
